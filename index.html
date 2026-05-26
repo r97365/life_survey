@@ -29,7 +29,7 @@
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             background: var(--card-bg);
             border-radius: 12px;
@@ -37,19 +37,79 @@
             overflow: hidden;
         }
 
-        /* 標題區：一邊大一邊小 */
+        /* ===================================================
+        高級感不對稱圓角 Banner 區 
+        =================================================== */
         .header {
-            background-color: var(--primary-color);
+            background-color: #1f3a52; /* 復刻照片中的深科技藍 */
             color: #ffffff;
-            padding: 30px 20px;
+            padding: 25px 30px 35px 30px; /* 調整內襯，讓下方留白多一點展現圓角弧度 */
             text-align: center;
+            position: relative;
+            
+            /* 靈魂核心：左下與右下大圓角，左上與右上保持直角 */
+            border-radius: 0 0 45px 45px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 微微的下陰影增加立體感 */
         }
 
+        /* Logo 與文字合併的排版容器 */
+        .header-logo {
+            display: flex;
+            align-items: center;       /* 讓圖片與右邊文字在水平線上完美置中對齊 */
+            justify-content: flex-start; /* 靠左對齊 */
+            margin-bottom: 15px;       /* 與下方大標題保持舒適的間距 */
+        }
+
+        /* 控管你用 F12 獵捕回來的圖片大小 */
+        .logo-img {
+            height: 32px;              /* 控制 Logo 高度，讓它精緻地跟中文字差不多高 */
+            width: auto;               /* 寬度自動等比例縮放，確保圖片不變形 */
+            margin-right: 12px;        /* 圖片與右邊公司名稱文字的舒適間距 */
+        }
+
+        /* 復刻官網質感的文字樣式 */
+        .logo-text {
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; /* 優先使用高質感黑體 */
+            font-size: 14px;           /* 調整字體大小 */
+            font-weight: 600;           /* 微粗體 */
+            color: #ffffff;            /* 深藍色背景搭配純白字，極致顯色 */
+            letter-spacing: 1px;       /* 稍微拉開字距，重現官方細節 */
+            opacity: 0.95;             /* 帶點微微透明度，視覺更柔和 */
+        }
+
+        /* 主標題排版容器 */
+        .header-main {
+            display: inline-block; /* 讓容器寬度剛好貼合文字 */
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* 標題字體與間距 */
         .header h1 {
-            font-size: 28px;
+            font-size: 38px; /* 放大字體讓氣勢出來 */
             font-weight: 700;
-            letter-spacing: 2px;
-            display: inline-block;
+            color: #ffffff; /* 「生涯規劃」為純白 */
+            letter-spacing: 6px; /* 稍微拉開字距，跟實體文宣一樣 */
+            line-height: 1.2;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* 金黃色的「問卷表」 */
+        .header h1 .gold-text {
+            color: #dfb26c; /* 復刻照片中優雅不俗氣的金黃色 */
+            font-size: 38px;
+            font-weight: 700;
+            margin-left: 5px;
+        }
+
+        /* 貫穿文字底部的精細金黃色裝飾線 */
+        .gold-line {
+            width: 105%; /* 比文字再稍微寬出一點點，視覺更延伸 */
+            height: 2px; /* 精細的 2px 裝飾線 */
+            background-color: #dfb26c; /* 使用同款金黃色 */
+            margin: 0 auto;
+            transform: translateX(-2.5%); /* 稍微往左位移補償寬度，使其完美置中 */
         }
 
         .header h1 span {
@@ -60,24 +120,93 @@
             letter-spacing: 0;
         }
 
+        /* 全新問卷文宣風引言區 */
         .intro {
-            padding: 20px;
-            background-color: #edf2f7;
-            font-size: 14px;
+            padding: 35px 25px;
+            background-color: #ffffff; /* 改為純白底色，讓劃線更明顯 */
+            font-size: 16px;
             color: #4a5568;
             border-bottom: 1px solid var(--border-color);
             text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* 每一行段落的間距 */
+        .intro p {
+            margin-bottom: 12px;
+        }
+
+        /* 照片中的「這輩子的所有可能花費」加粗放大 */
+        .intro strong {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1a202c;
+        }
+
+        /* 照片中的「越清楚知道這輩子的總花費」黑字加粗 */
+        .intro .accent-bold {
+            background: none;
+            font-size: 19px;
+            font-weight: 800;
+            color: #1a202c;
+            padding: 0;
+        }
+
+        /* 靈魂核心：模擬照片中底部的「粉橘色螢光劃線」 */
+        .intro mark.highlight {
+            background: linear-gradient(to top, rgba(221, 107, 32, 0.25) 40%, transparent 40%);
+            font-weight: 700;
+            color: #2d3748;
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        /* 下方小字的區塊排版 */
+        .intro-footer {
+            margin-top: 25px;
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.8;
         }
 
         .form-body {
             padding: 25px 20px;
         }
 
-        /* 名字欄位單獨一行 */
+        
+
+        /* 讓姓名與年齡群組可以彈性並排 */
         .name-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px 25px; /* 欄位之間的上下與左右間距 */
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px dashed var(--border-color);
+        }
+
+        /* 每一組「文字+輸入框」的小外殼 */
+        .info-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .name-section label {
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 8px;
+            white-space: nowrap; /* 確保文字在手機上不被亂切斷 */
+        }
+
+        /* 年齡專用輸入框的寬度與置中 */
+        .age-input {
+            width: 75px;
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
         }
 
         .name-section label {
@@ -217,9 +346,24 @@
             font-size: 18px;
             font-weight: bold;
             color: var(--primary-color);
+            text-align: center;
             background: #ebf8ff;
             padding: 15px;
             border-radius: 6px;
+        }
+        /* 底部特製文宣金句區 */
+        .report-gold-quote {
+            background-color: #1f3a52; /* 復刻照片中的深科技藍波浪背景色 */
+            color: #dfb26c;            /* 復刻照片中優雅不俗氣的金黃色 */
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            font-size: 20px;           /* 放大字體展現氣勢 */
+            font-weight: 700;          /* 粗體字 */
+            text-align: center;        /* 置中對齊 */
+            padding: 20px 15px;        /* 上下留白，營造照片中的內襯感 */
+            margin-top: 25px;          /* 與上方區塊保持舒適間距 */
+            border-radius: 0 0 12px 12px; /* 貼合容器最底部的圓角 */
+            letter-spacing: 2px;       /* 微調字距提升高級感 */
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.15); /* 微微的內陰影重現紙張壓紋立體感 */
         }
     </style>
 </head>
@@ -228,19 +372,46 @@
 <div class="container">
     <div id="form-page">
         <div class="header">
-            <h1>生涯規劃 <span>問卷表</span></h1>
+            <div class="header-logo">
+                <img src="logo.png" alt="呈祥保經 Logo" class="logo-img">
+                
+                <span class="logo-text">呈祥保險經紀人股份有限公司</span>
+            </div>
+            
+            <div class="header-main">
+                <h1>生涯規劃 <span class="gold-text">問卷表</span></h1>
+                <div class="gold-line"></div>
+            </div>
         </div>
         <div class="intro">
-            您，是否曾經計算過自己這輩子的所有可能花費呢？<br>
-            讓我們透過簡單的推算，看看未來的目標需要多少財務支持！
+        <p>您，是否曾經計算過自己 <strong>這輩子的所有可能花費</strong> 呢？</p>
+        <p>如果 <mark class="accent-bold">越清楚知道這輩子的總花費</mark></p>
+        <p>是不是就可以知道 <mark class="highlight">目前的工作能否滿足現在與未來的自己</mark> 呢？</p>
+        
+        <div class="intro-footer">
+            我們今天要完成的這項調查就是希望透過問卷計算的方式<br>
+            讓大家 <mark class="highlight">更清楚自己目前的工作對於未來生活的實踐力</mark> ，讓我們開始吧！
         </div>
+    </div>
 
         <form id="real-form">
             <div class="form-body">
                 
                 <div class="name-section">
-                    <label>您的姓名：</label>
-                    <input type="text" id="user-name-input" class="name-input" required placeholder="請輸入姓名">
+                    <div class="info-group">
+                        <label>您的姓名：</label>
+                        <input type="text" id="user-name-input" class="name-input" required placeholder="請輸入姓名">
+                    </div>
+                    <div class="info-group">
+                        <label>目前年齡：</label>
+                        <input type="number" id="current-age" class="age-input" min="0" max="120" placeholder="歲" required>
+                        <span style="margin-left: 5px; font-size: 16px;">歲</span>
+                    </div>
+                    <div class="info-group">
+                        <label>預計退休年齡：</label>
+                        <input type="number" id="retire-age" class="age-input" min="0" max="120" placeholder="歲" required>
+                        <span style="margin-left: 5px; font-size: 16px;">歲</span>
+                    </div>
                 </div>
 
                 <div class="question-row">
@@ -266,7 +437,7 @@
                 </div>
 
                 <div class="question-row">
-                    <span class="title">● 輯車子資金：</span>
+                    <span class="title">● 購車資金：</span>
                     <span>平均車價</span>
                     <input type="number" id="car-price" min="0" placeholder="0" required>
                     <span>萬 × 總共</span>
@@ -283,7 +454,7 @@
                         <option value="0">0元 免費登記</option>
                         <option value="200">200元 公證費</option>
                         <option value="500000">50萬 傳統流水席</option>
-                        <option value="1000000" selected>100萬 高高級飯店</option>
+                        <option value="1000000" selected>100萬 高級飯店</option>
                     </select>
                     <span>＝</span>
                     <input type="number" class="calc-output" id="wedding-total" readonly value="100">
@@ -292,7 +463,7 @@
 
                 <div class="question-row">
                     <span class="title">● 子女教育費：</span>
-                    <span>我預計算</span>
+                    <span>我預計要</span>
                     <input type="number" id="child-count" min="0" placeholder="0" required>
                     <span>個孩子 × 平均花費 500 萬 ＝</span>
                     <input type="number" class="calc-output" id="child-total" readonly value="0">
@@ -333,7 +504,6 @@
     <div id="report-page">
         <div class="report-header">
             <h2>📊 <span id="user-name"></span> 的生涯財務規劃報告</h2>
-            <p>唯有真正滿足未來自己理想中的真實生活花費！</p>
         </div>
         
         <div class="report-card">
@@ -346,14 +516,18 @@
             <div class="report-item"><span>7. 孝養父母準備金</span><span><b id="r-filial">0</b> 萬元</span></div>
             
             <div class="report-total">
-                純共需要花貸金額總數為：<br>
+                總共需要花費金額總數為：<br>
                 <span id="final-total" style="font-size: 32px;">0</span> 萬元
             </div>
             
             <div class="report-footer">
-                💡 平均未來 35 年工作奮鬥期：<br>
+                💡 未來 <span id="working-years" style="font-weight: bold; color: var(--primary-color);">0</span> 年工作奮鬥期：<br>
                 • 平均一年應該賺有：<span id="year-income" style="color:var(--accent-color)">0</span> 萬的年收入<br>
                 • 換算每月額度，現在起每個月應有：<span id="month-income" style="color:var(--accent-color)">0</span> 萬月薪
+            </div>
+            
+            <div class="report-gold-quote">
+                才能真正滿足未來自己理想中的真實生活花費！
             </div>
         </div>
     </div>
@@ -361,6 +535,9 @@
 
 <script>
     // 抓取所有輸入欄位的 DOM
+    const currentAge = document.getElementById('current-age');
+    const retireAge = document.getElementById('retire-age');
+
     const liveMonthly = document.getElementById('live-monthly');
     const liveYears = document.getElementById('live-years');
     const liveTotal = document.getElementById('live-total');
@@ -416,8 +593,20 @@
     // 監聽所有輸入框
     const allInputs = document.querySelectorAll('input, select');
     allInputs.forEach(input => {
+        // 當使用者在輸入時，即時計算
         input.addEventListener('input', calculateAll);
-        input.addEventListener('change', calculateAll);
+        
+        // 當使用者離開輸入框（或完成選擇）時，自動修正無效的 0
+        input.addEventListener('change', function() {
+            // 只針對數字輸入框（type="number"），且排除掉唯讀的計算輸出框（calc-output）
+            if (this.type === 'number' && !this.classList.contains('calc-output')) {
+                if (this.value !== '') {
+                    // 透過轉成 Number 再轉回字串，瀏覽器就會自動把前面多餘的 0 吃掉
+                    this.value = Number(this.value); 
+                }
+            }
+            calculateAll(); // 確保修正後再次同步計算
+        });
     });
 
     // 表單點擊送出處理
@@ -443,7 +632,15 @@
                            Number(filialTotal.value);
         document.getElementById('final-total').innerText = grandTotal;
 
-        const annualIncome = (grandTotal / 35).toFixed(1);
+        // 1. 自動計算：退休年齡減掉目前年齡 (保底 1 年以免使用者亂填數字導致除以 0 出錯)
+        let workingYearsVal = Number(retireAge.value) - Number(currentAge.value);
+        if (workingYearsVal <= 0) workingYearsVal = 1;
+
+        // 2. 把算好的數字貼到我們剛剛在步驟一做的小機關裡
+        document.getElementById('working-years').innerText = workingYearsVal;
+
+        // 3. 改用算好的真實年數去計算平均年薪
+        const annualIncome = (grandTotal / workingYearsVal).toFixed(1);
         document.getElementById('year-income').innerText = annualIncome;
 
         const monthlyIncome = (annualIncome / 12).toFixed(1);
@@ -452,6 +649,8 @@
         // 打包 15 個欄位資料
         const formData = new URLSearchParams();
         formData.append('entry.1085405450', nameVal);
+        formData.append('entry.1975776763', currentAge.value);
+        formData.append('entry.891272375', retireAge.value);
         formData.append('entry.2100833719', liveMonthly.value);
         formData.append('entry.423626058', liveYears.value);
         formData.append('entry.517688924', houseCount.value);
