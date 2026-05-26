@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生涯規劃問卷表</title>
+    <style>
+        :root {
+            --primary-color: #1a365d; /* 質感深藍 */
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --accent-color: #dd6b20; /* 提醒橘 */
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* ===================================================
+        高級感不對稱圓角 Banner 區 
+        =================================================== */
+        .header {
+            background-color: #1f3a52; /* 復刻照片中的深科技藍 */
+            color: #ffffff;
+            padding: 25px 30px 35px 30px;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 45px 45px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+            margin-right: 12px;
+        }
+
+        .logo-text {
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 1px;
+            opacity: 0.95;
+        }
+
+        .header-main {
+            display: inline-block;
+            text-align: center;
+            margin-top: 5px;
+            max-width: 100%; /* 防止超出螢幕 */
+        }
+
+        .header h1 {
+            font-size: 38px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 6px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .header h1 .gold-text {
+            color: #dfb26c;
+            font-size: 38px;
+            font-weight: 700;
+            margin-left: 5px;
+        }
+
+        .gold-line {
+            width: 105%;
+            height: 2px;
+            background-color: #dfb26c;
+            margin: 0 auto;
+            transform: translateX(-2.5%);
+        }
+
+        /* 全新問卷文宣風引言區 */
+        .intro {
+            padding: 35px 25px;
+            background-color: #ffffff;
+            font-size: 16px;
+            color: #4a5568;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .intro p {
+            margin-bottom: 12px;
+        }
+
+        .intro strong {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1a202c;
+        }
+
+        .intro .accent-bold {
+            background: none;
+            font-size: 19px;
+            font-weight: 800;
+            color: #1a202c;
+            padding: 0;
+        }
+
+        .intro mark.highlight {
+            background: linear-gradient(to top, rgba(221, 107, 32, 0.25) 40%, transparent 40%);
+            font-weight: 700;
+            color: #2d3748;
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        .intro-footer {
+            margin-top: 25px;
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .form-body {
+            padding: 25px 20px;
+        }
+
+        /* 讓姓名與年齡群組可以彈性並排 */
+        .name-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px 25px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed var(--border-color);
+        }
+
+        .info-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .name-section label {
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        .age-input {
+            width: 75px;
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .name-input {
+            width: 150px;
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        /* 核心排版：字格交織的一整行 */
+        .question-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 15px;
+        }
+
+        .question-row:hover {
+            background-color: #fcfcfc;
+        }
+
+        /* 包裹文字標題，方便在手機版控制排版 */
+        .question-row .title {
+            font-weight: 600;
+            min-width: 110px;
+            color: var(--primary-color);
+        }
+
+        /* 內容字詞外殼 */
+        .question-row span {
+            margin: 4px 2px;
+        }
+
+        /* 輸入框通用樣式 */
+        input[type="number"], select {
+            width: 80px;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin: 0 4px;
+            font-size: 15px;
+            text-align: center;
+            background-color: #fff;
+            -webkit-appearance: none; /* 移除 iOS 預設內陰影 */
+        }
+
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        /* 唯讀的自動計算框 */
+        input.calc-output {
+            width: 90px;
+            background-color: #edf2f7;
+            color: var(--accent-color);
+            font-weight: bold;
+            border: 1px solid #cbd5e0;
+            cursor: not-allowed;
+        }
+
+        /* 婚禮特製下拉選單寬度 */
+        select.wedding-select {
+            width: 165px;
+            text-align-last: center; /* 讓文字在下拉選單裡置中 */
+        }
+
+        /* 送出按鈕 */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 6px rgba(26, 54, 93, 0.2);
+        }
+
+        .submit-btn:hover {
+            background-color: #2c5282;
+        }
+
+        /* 最終成果報告頁面 */
+        #report-page {
+            display: none;
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        .report-header {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .report-card {
+            background: #f7fafc;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .report-item {
+            margin-bottom: 12px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        .report-total {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background: #fffaf0;
+            border-radius: 6px;
+            border: 1px dashed var(--accent-color);
+            line-height: 1.5;
+        }
+
+        .report-footer {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-color);
+            background: #ebf8ff;
+            padding: 15px;
+            border-radius: 6px;
+            line-height: 1.8;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* 底部特製文宣金句區 */
+        .report-gold-quote {
+            background-color: #1f3a52;
+            color: #dfb26c;
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 25px;
+            border-radius: 0 0 12px 12px;
+            letter-spacing: 2px;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* ===================================================
+        📱 RWD 手機版極致優化核心代碼 (螢幕 768px 以下自動啟用)
+        =================================================== */
+        /* ===================================================
+        📱 RWD 手機版極致優化核心代碼 (螢幕 768px 以下自動啟用)
+        =================================================== */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px; /* 縮小網頁外圍留白，幫手機爭取更多橫向空間 */
+            }
+
+            .header {
+                padding: 20px 15px 25px 15px;
+                border-radius: 0 0 30px 30px; /* 手機版圓角微調 */
+            }
+
+            .header h1 {
+                font-size: 28px; /* 縮小標題字體，確保手機不塞爆折行 */
+                letter-spacing: 3px;
+            }
+
+            .header h1 .gold-text {
+                font-size: 28px;
+            }
+
+            .logo-img {
+                height: 26px; /* 稍微縮小 Logo */
+            }
+
+            .logo-text {
+                font-size: 12px;
+            }
+
+            .intro {
+                padding: 25px 15px;
+                font-size: 15px;
+            }
+
+            .intro strong, .intro .accent-bold {
+                font-size: 17px;
+            }
+
+            /* 姓名與年齡欄位在手機上改為一列一組 */
+            .name-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .info-group {
+                width: 100%;
+                justify-content: space-between; /* 讓標籤與輸入框靠兩側，對齊更漂亮 */
+            }
+
+            .name-input {
+                width: 65%;
+            }
+
+            /* 💡 【核心重構】字格交織題目：改為上下兩層結構，保證治好排版強迫症 */
+            .question-row {
+                padding: 16px 8px;
+                display: flex;
+                flex-direction: column; /* 改為上下排列：上方標題、下方輸入區 */
+                align-items: flex-start;
+                border-bottom: 1px solid #edf2f7;
+            }
+
+            .question-row .title {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px; /* 讓大標題自己站一行，拉開間距 */
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            /* 下方公式輸入區：利用 flex 讓裡面的文字與輸入框均勻對齊 */
+            .question-row-content {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: flex-start; /* 靠左依序橫向排列 */
+                width: 100%;
+                background-color: #f8fafc; /* 加上淡淡的底色，讓輸入區像一個獨立的小卡片 */
+                padding: 10px 12px;
+                border-radius: 8px;
+                box-sizing: border-box;
+            }
+
+            .question-row-content span {
+                font-size: 14px;
+                color: #4a5568;
+                margin: 0 2px;
+                white-space: nowrap; /* 防止公式內的中文字自己折行 */
+            }
+
+            /* 💡 【控制框框大小】手機版精緻輸入框尺寸 */
+            input[type="number"] {
+                width: 58px !important;  /* 強制縮小寬度，不再顯得空洞空曠 */
+                height: 34px;            /* 高度適中，手指非常好點擊 */
+                padding: 4px 2px !important;
+                font-size: 15px;
+                margin: 2px 4px !important;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                box-sizing: border-box;
+            }
+
+            /* 特殊調整：唯讀的自動計算結果框（讓它視覺更明顯、稍微寬一點點塞數字） */
+            input.calc-output {
+                width: 72px !important;
+                background-color: #e2e8f0 !important; /* 顏色稍微加深，凸顯這是結果 */
+                color: var(--accent-color) !important;
+                font-weight: 800;
+                border: 1px solid #cbd5e1;
+            }
+
+            /* 世紀婚禮下拉選單寬度微調 */
+            select.wedding-select {
+                width: 145px !important;
+                height: 34px;
+                padding: 4px 6px;
+                font-size: 13px;
+                margin: 2px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="form-page">
+        <div class="header">
+            <div class="header-logo">
+                <img src="logo.png" alt="呈祥保經 Logo" class="logo-img">
+                <span class="logo-text">呈祥保險經紀人股份有限公司</span>
+            </div>
+            
+            <div class="header-main">
+                <h1>生涯規劃<span class="gold-text">問卷表</span></h1>
+                <div class="gold-line"></div>
+            </div>
+        </div>
+        
+        <div class="intro">
+            <p>您，是否曾經計算過自己 <strong>這輩子的所有可能花費</strong> 呢？</p>
+            <p>如果 <mark class="accent-bold">越清楚知道這輩子的總花費</mark></p>
+            <p>是不是就可以知道 <mark class="highlight">目前的工作能否滿足現在與未來的自己</mark> 呢？</p>
+            
+            <div class="intro-footer">
+                我們今天要完成的這項調查就是希望透過問卷計算的方式<br>
+                讓大家 <mark class="highlight">更清楚自己目前的工作對於未來生活的實踐力</mark> ，讓我們開始吧！
+            </div>
+        </div>
+
+        <form id="real-form">
+            <div class="form-body">
+                
+                <div class="name-section">
+                    <div class="info-group">
+                        <label>您的姓名：</label>
+                        <input type="text" id="user-name-input" class="name-input" required placeholder="請輸入姓名">
+                    </div>
+                    <div class="info-group">
+                        <label>目前年齡：</label>
+                        <div>
+                            <input type="number" id="current-age" class="age-input" inputmode="numeric" pattern="[0-9]*" min="0" max="120" placeholder="歲" required>
+                            <span style="margin-left: 2px; font-size: 16px;">歲</span>
+                        </div>
+                    </div>
+                    <div class="info-group">
+                        <label>預計退休年齡：</label>
+                        <div>
+                            <input type="number" id="retire-age" class="age-input" inputmode="numeric" pattern="[0-9]*" min="0" max="120" placeholder="歲" required>
+                            <span style="margin-left: 2px; font-size: 16px;">歲</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 平均生活費：</div>
+                    <div class="question-row-content">
+                        <span>每月</span>
+                        <input type="number" id="live-monthly" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>萬 × 12個月 × 生活</span>
+                        <input type="number" id="live-years" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>年 ＝</span>
+                        <input type="number" class="calc-output" id="live-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 購物買房金：</div>
+                    <div class="question-row-content">
+                        <span>目標</span>
+                        <input type="number" id="house-count" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>間 × 區域平均房價</span>
+                        <input type="number" id="house-price" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>萬 ＝</span>
+                        <input type="number" class="calc-output" id="house-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 購車資金：</div>
+                    <div class="question-row-content">
+                        <span>平均車價</span>
+                        <input type="number" id="car-price" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>萬 × 總共</span>
+                        <input type="number" id="car-count" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>台 ＝</span>
+                        <input type="number" class="calc-output" id="car-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 世紀婚禮費：</div>
+                    <div class="question-row-content">
+                        <span>選擇等級：</span>
+                        <select id="wedding-select" class="wedding-select">
+                            <option value="0">0元 免費登記</option>
+                            <option value="200">200元 公證費</option>
+                            <option value="500000">50萬 傳統流水席</option>
+                            <option value="1000000" selected>100萬 高級飯店</option>
+                        </select>
+                        <span>＝</span>
+                        <input type="number" class="calc-output" id="wedding-total" readonly value="100">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 子女教育費：</div>
+                    <div class="question-row-content">
+                        <span>我預計要</span>
+                        <input type="number" id="child-count" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>個孩子 × 平均花費 500 萬 ＝</span>
+                        <input type="number" class="calc-output" id="child-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 旅遊娛樂費：</div>
+                    <div class="question-row-content">
+                        <span>理想中一年出國</span>
+                        <input type="number" id="tour-count" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>次 × 每次平均</span>
+                        <input type="number" id="tour-budget" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>萬 ×</span>
+                        <input type="number" id="tour-years" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>年 ＝</span>
+                        <input type="number" class="calc-output" id="tour-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <div class="question-row">
+                    <div class="title">● 孝養父母費：</div>
+                    <div class="question-row-content">
+                        <span>預計孝期費用每年</span>
+                        <input type="number" id="filial-annual" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>萬 ×</span>
+                        <input type="number" id="filial-count" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>人 × 孝順</span>
+                        <input type="number" id="filial-years" min="0" placeholder="0" inputmode="numeric" pattern="[0-9]*" required>
+                        <span>年 ＝</span>
+                        <input type="number" class="calc-output" id="filial-total" readonly value="0">
+                        <span>萬</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">產生生涯財務規劃報告 ➔</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="report-page">
+        <div class="report-header">
+            <h2>📊 <span id="user-name"></span> 的生涯財務規劃報告</h2>
+        </div>
+        
+        <div class="report-card">
+            <div class="report-item"><span>1. 預估生活總花費</span><span><b id="r-live">0</b> 萬元</span></div>
+            <div class="report-item"><span>2. 預估購屋總資金</span><span><b id="r-house">0</b> 萬元</span></div>
+            <div class="report-item"><span>3. 預估購車總資金</span><span><b id="r-car">0</b> 萬元</span></div>
+            <div class="report-item"><span>4. 世紀婚禮預算</span><span><b id="r-wedding">0</b> 萬元</span></div>
+            <div class="report-item"><span>5. 子女教育總經費</span><span><b id="r-child">0</b> 萬元</span></div>
+            <div class="report-item"><span>6. 旅遊娛樂總支出</span><span><b id="r-tour">0</b> 萬元</span></div>
+            <div class="report-item"><span>7. 孝養父母準備金</span><span><b id="r-filial">0</b> 萬元</span></div>
+            
+            <div class="report-total">
+                總共需要花費金額總數為：<br>
+                <span id="final-total" style="font-size: 32px;">0</span> 萬元
+            </div>
+            
+            <div class="report-footer">
+                💡 未來 <span id="working-years" style="font-weight: bold; color: var(--primary-color);">0</span> 年工作奮鬥期：<br>
+                • 平均一年應該賺有：<span id="year-income" style="color:var(--accent-color)">0</span> 萬的年收入<br>
+                • 換算每月額度，現在起每個月應有：<span id="month-income" style="color:var(--accent-color)">0</span> 萬月薪
+            </div>
+            
+            <div class="report-gold-quote">
+                才能真正滿足未來自己理想中的真實生活花費！
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 抓取所有輸入欄位的 DOM
+    const currentAge = document.getElementById('current-age');
+    const retireAge = document.getElementById('retire-age');
+
+    const liveMonthly = document.getElementById('live-monthly');
+    const liveYears = document.getElementById('live-years');
+    const liveTotal = document.getElementById('live-total');
+
+    const houseCount = document.getElementById('house-count');
+    const housePrice = document.getElementById('house-price');
+    const houseTotal = document.getElementById('house-total');
+
+    const carPrice = document.getElementById('car-price');
+    const carCount = document.getElementById('car-count');
+    const carTotal = document.getElementById('car-total');
+
+    const weddingSelect = document.getElementById('wedding-select');
+    const weddingTotal = document.getElementById('wedding-total');
+
+    const childCount = document.getElementById('child-count');
+    const childTotal = document.getElementById('child-total');
+
+    const tourCount = document.getElementById('tour-count');
+    const tourBudget = document.getElementById('tour-budget');
+    const tourYears = document.getElementById('tour-years');
+    const tourTotal = document.getElementById('tour-total');
+
+    const filialAnnual = document.getElementById('filial-annual');
+    const filialCount = document.getElementById('filial-count');
+    const filialYears = document.getElementById('filial-years');
+    const filialTotal = document.getElementById('filial-total');
+
+    // 即時動態計算核心邏輯
+    function calculateAll() {
+        const liveCalculated = (Number(liveMonthly.value) || 0) * 12 * (Number(liveYears.value) || 0);
+        liveTotal.value = liveCalculated;
+
+        const houseCalculated = (Number(houseCount.value) || 0) * (Number(housePrice.value) || 0);
+        houseTotal.value = houseCalculated;
+
+        const carCalculated = (Number(carPrice.value) || 0) * (Number(carCount.value) || 0);
+        carTotal.value = carCalculated;
+
+        const weddingCalculated = (Number(weddingSelect.value) || 0) / 10000;
+        weddingTotal.value = weddingCalculated;
+
+        const childCalculated = (Number(childCount.value) || 0) * 500;
+        childTotal.value = childCalculated;
+
+        const tourCalculated = (Number(tourCount.value) || 0) * (Number(tourBudget.value) || 0) * (Number(tourYears.value) || 0);
+        tourTotal.value = tourCalculated;
+
+        const filialCalculated = (Number(filialAnnual.value) || 0) * (Number(filialCount.value) || 0) * (Number(filialYears.value) || 0);
+        filialTotal.value = filialCalculated;
+    }
+
+    // 監聽所有輸入框
+    const allInputs = document.querySelectorAll('input, select');
+    allInputs.forEach(input => {
+        input.addEventListener('input', calculateAll);
+        
+        input.addEventListener('change', function() {
+            if (this.type === 'number' && !this.classList.contains('calc-output')) {
+                if (this.value !== '') {
+                    this.value = Number(this.value); 
+                }
+            }
+            calculateAll();
+        });
+    });
+
+    // 表單點擊送出處理
+    const realForm = document.getElementById('real-form');
+    realForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nameVal = document.getElementById('user-name-input').value || '您';
+        document.getElementById('user-name').innerText = nameVal;
+
+        document.getElementById('r-live').innerText = liveTotal.value;
+        document.getElementById('r-house').innerText = houseTotal.value;
+        document.getElementById('r-car').innerText = carTotal.value;
+        document.getElementById('r-wedding').innerText = weddingTotal.value;
+        document.getElementById('r-child').innerText = childTotal.value;
+        document.getElementById('r-tour').innerText = tourTotal.value;
+        document.getElementById('r-filial').innerText = filialTotal.value;
+
+        const grandTotal = Number(liveTotal.value) + Number(houseTotal.value) + Number(carTotal.value) + 
+                           Number(weddingTotal.value) + Number(childTotal.value) + Number(tourTotal.value) + 
+                           Number(filialTotal.value);
+        document.getElementById('final-total').innerText = grandTotal;
+
+        let workingYearsVal = Number(retireAge.value) - Number(currentAge.value);
+        if (workingYearsVal <= 0) workingYearsVal = 1;
+
+        document.getElementById('working-years').innerText = workingYearsVal;
+
+        const annualIncome = (grandTotal / workingYearsVal).toFixed(1);
+        document.getElementById('year-income').innerText = annualIncome;
+
+        const monthlyIncome = (annualIncome / 12).toFixed(1);
+        document.getElementById('month-income').innerText = monthlyIncome;
+
+        // 打包 15 個欄位資料
+        const formData = new URLSearchParams();
+        formData.append('entry.1085405450', nameVal);
+        formData.append('entry.1975776763', currentAge.value);
+        formData.append('entry.891272375', retireAge.value);
+        formData.append('entry.2100833719', liveMonthly.value);
+        formData.append('entry.423626058', liveYears.value);
+        formData.append('entry.517688924', houseCount.value);
+        formData.append('entry.282349436', housePrice.value);
+        formData.append('entry.1344313537', carPrice.value);
+        formData.append('entry.1854063608', carCount.value);
+        formData.append('entry.1117180565', weddingSelect.value); 
+        formData.append('entry.2121486362', childCount.value);
+        formData.append('entry.1447229271', tourCount.value);
+        formData.append('entry.94401092', tourBudget.value);
+        formData.append('entry.812218647', tourYears.value);
+        formData.append('entry.1769889776', filialAnnual.value);
+        formData.append('entry.383106759', filialCount.value);
+        formData.append('entry.1740885043', filialYears.value);
+
+        const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeiy6IEj6pBF8xXV4FDbxIxCtVMaCNjquyk21ISgpbgE-Rl0Q/formResponse";
+        
+        fetch(googleFormUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData.toString()
+        });
+
+        setTimeout(() => {
+            document.getElementById('form-page').style.display = 'none';
+            document.getElementById('report-page').style.display = 'block';
+            window.scrollTo(0, 0);
+        }, 300);
+    });
+</script>
+
+</body>
+</html>
