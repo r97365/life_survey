@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理財狀況與目標需求調查</title>
+    <style>
+        /* 基礎設定 */
+        body {
+            font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #fcfcfc;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .survey-container {
+            width: 100%;
+            max-width: 800px;
+            background: #ffffff;
+            padding: 20px;
+        }
+
+        /* 頂部時間軸圖片設定 */
+        .top-timeline-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 40px;
+        }
+
+        /* 題目單元區塊 */
+        .question-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 45px;
+        }
+
+        /* 左側大數字 */
+        .question-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #222;
+            margin-right: 25px;
+            min-width: 70px;
+            letter-spacing: -2px;
+        }
+
+        /* 右側內容區 */
+        .question-content {
+            flex-grow: 1;
+        }
+
+        /* 題目文字與下底線 */
+        .question-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #555;
+            margin-top: 5px;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        /* 題型提示（單選/複選） */
+        .question-type-hint {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        /* 選項容器：垂直排列 */
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 5px;
+        }
+
+        /* 通用選項 Label 設定 */
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+            line-height: 1.4;
+        }
+
+        .option-label input {
+            display: none;
+        }
+
+        /* --- 樣式 A：自訂「單選」圓圈 (Radio) --- */
+        .custom-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #444;
+            border-radius: 50%;
+            margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover .custom-radio {
+            border-color: #000;
+            background-color: #f0f0f0;
+        }
+
+        .option-label input:checked + .custom-radio {
+            background-color: #222;
+            border-color: #222;
+        }
+
+        .option-label input:checked + .custom-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- 樣式 B：自訂「複選」方框 (Checkbox) --- */
+        .custom-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #444;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover .custom-checkbox {
+            border-color: #000;
+            background-color: #f0f0f0;
+        }
+
+        .option-label input:checked + .custom-checkbox {
+            background-color: #222;
+            border-color: #222;
+        }
+
+        .option-label input:checked + .custom-checkbox::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* 💡 新增：LINE & IG QR Code 區塊設定 */
+        .social-qrcode-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 50px 0;
+            padding: 30px 10px;
+            background-color: #fafafa;
+            border-radius: 8px;
+        }
+
+        .qrcode-box {
+            text-align: center;
+            max-width: 160px;
+        }
+
+        .qrcode-box a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+            transition: color 0.2s ease;
+        }
+
+        .qrcode-box a:hover {
+            color: #000;
+        }
+
+        .qrcode-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 12px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+        }
+
+        .qrcode-box a:hover .qrcode-img {
+            transform: scale(1.03); /* 滑鼠移上去時微放大，增加互動感 */
+        }
+
+        /* 💡 新增：底層客戶資料填寫表格 */
+        .user-info-form {
+            border-top: 2px dashed #ccc;
+            padding-top: 40px;
+            margin-top: 5px;
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 1.15rem;
+            font-weight: 700;
+            width: 80px;
+            color: #222;
+        }
+
+        .form-group input {
+            flex-grow: 1;
+            font-size: 1.1rem;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        /* 輸入框點擊聚焦時的黑框設定 */
+        .form-group input:focus {
+            border-color: #222;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        /* 響應式 RWD 調整 */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+            .top-timeline-img {
+                margin-bottom: 25px;
+            }
+            .question-item {
+                flex-direction: column;
+            }
+            .question-number {
+                font-size: 2.5rem;
+                margin-bottom: 6px;
+                min-width: auto;
+            }
+            .question-title {
+                font-size: 1.15rem;
+                margin-bottom: 14px;
+            }
+            .option-label {
+                font-size: 1rem;
+            }
+            /* 手機版時 QR code 改成上下排列 */
+            .social-qrcode-section {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .qrcode-box {
+                max-width: 140px;
+            }
+            /* 手機版表格排列 */
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .form-group input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="survey-container">
+
+    <img src="timeline.png" alt="理財教練陪跑計劃時間軸" class="top-timeline-img">
+
+    <div class="question-item">
+        <div class="question-number">01</div>
+        <div class="question-content">
+            <div class="question-title">關於目前的財務狀況，您最希望改善哪一個部分？<span class="question-type-hint">（可複選）</span></div>
+            <div class="options-group">
+                <label class="option-label">
+                    <input type="checkbox" name="q1" value="每月記帳還是存不到錢">
+                    <span class="custom-checkbox"></span>每月記帳還是存不到錢
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q1" value="有存一筆錢，但只知道放銀行不知道能投哪裡">
+                    <span class="custom-checkbox"></span>有存一筆錢，但只知道放銀行不知道能投哪裡
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q1" value="平時太忙，沒時間研究股票和市場">
+                    <span class="custom-checkbox"></span>平時太忙，沒時間研究股票和市場
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q1" value="有在做投資，但對投資市場不夠了解">
+                    <span class="custom-checkbox"></span>有在做投資，但對投資市場不夠了解
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q1" value="已加入投資市場多年，但會想知道還能怎麼規劃去放大資產">
+                    <span class="custom-checkbox"></span>已加入投資市場多年，但會想知道還能怎麼規劃去放大資產
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <div class="question-number">02</div>
+        <div class="question-content">
+            <div class="question-title">目前您最常用的投資或儲蓄工具是哪些呢？<span class="question-type-hint">（可複選）</span></div>
+            <div class="options-group">
+                <label class="option-label">
+                    <input type="checkbox" name="q2" value="銀行定存/活存">
+                    <span class="custom-checkbox"></span>銀行定存/活存
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q2" value="股票/ETF">
+                    <span class="custom-checkbox"></span>股票/ETF
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q2" value="儲蓄型保險/投資型保單">
+                    <span class="custom-checkbox"></span>儲蓄型保險/投資型保單
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q2" value="外幣/基金">
+                    <span class="custom-checkbox"></span>外幣/基金
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <div class="question-number">03</div>
+        <div class="question-content">
+            <div class="question-title">如果現在有一筆額外的預算，您最想優先達成什麼人生目標？<span class="question-type-hint">（單選）</span></div>
+            <div class="options-group">
+                <label class="option-label">
+                    <input type="radio" name="q3" value="加速存到第一桶金">
+                    <span class="custom-radio"></span>加速存到第一桶金
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="買車/買房">
+                    <span class="custom-radio"></span>買車/買房
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="存結婚基金">
+                    <span class="custom-radio"></span>存結婚基金
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="每個月出國旅行">
+                    <span class="custom-radio"></span>每個月出國旅行
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="買奢侈品">
+                    <span class="custom-radio"></span>買奢侈品
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="打造退休後的每個月被動收入">
+                    <span class="custom-radio"></span>打造退休後的每個月被動收入
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="尚未開始投資">
+                    <span class="custom-radio"></span>尚未開始投資
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <div class="question-number">04</div>
+        <div class="question-content">
+            <div class="question-title">在選擇理財工具時，您最看重哪一個特點？<span class="question-type-hint">（單選）</span></div>
+            <div class="options-group">
+                <label class="option-label">
+                    <input type="radio" name="q4" value="安全第一">
+                    <span class="custom-radio"></span><strong>安全第一：</strong>絕對不能虧損，資產要穩健成長。
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="平衡發展">
+                    <span class="custom-radio"></span><strong>平衡發展：</strong>可以承受一點點波動，但要有打敗通膨的報酬率。
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="靈活彈性">
+                    <span class="custom-radio"></span><strong>靈活彈性：</strong>隨時可以調整，資金調度要方便。
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="省時省心">
+                    <span class="custom-radio"></span><strong>省時省心：</strong>不用每天看盤，交給專業機制自動運作。
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-qrcode-section">
+        <div class="qrcode-box">
+            <a href="https://line.me/ti/p/hDV9ANKjP_" target="_blank">
+                <img src="line.png" alt="LINE QR Code" class="qrcode-img">
+                <span>點擊加入 LINE 官方</span>
+            </a>
+        </div>
+        <div class="qrcode-box">
+            <a href="https://www.instagram.com/wendlinn?igsh=MTc5ZXNmZjk0czdqYQ%3D%3D&utm_source=qr" target="_blank">
+                <img src="ig.png" alt="Instagram QR Code" class="qrcode-img">
+                <span>點擊追蹤 Instagram</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="user-info-form">
+        <div class="form-title">📋 填寫基本聯絡資料</div>
+        <div class="form-group">
+            <label for="username">客戶姓名</label>
+            <input type="text" id="username" name="username" placeholder="請輸入您的姓名" required>
+        </div>
+        <div class="form-group">
+            <label for="usertel">手機號碼</label>
+            <input type="tel" id="usertel" name="usertel" placeholder="請輸入您的聯絡手機" required>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
