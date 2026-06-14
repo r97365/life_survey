@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>理財狀況與目標需求調查</title>
+    <title>KJTC 理財教練陪跑計劃 推廣表</title>
     <style>
         /* 基礎設定 */
         body {
@@ -23,12 +23,76 @@
             padding: 20px;
         }
 
+        /* 💡 新增：最頂部 KJTC 品牌橫幅區塊 */
+        .brand-header {
+            display: flex;
+            align-items: stretch;
+            background-color: #ffffff;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+
+        /* 左側黑色核心特點區塊 */
+        .brand-features {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 20px 25px;
+            min-width: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-features ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-features li {
+            margin-bottom: 4px;
+        }
+        .brand-features li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 右側標題區塊 */
+        .brand-title-box {
+            flex-grow: 1;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #fafafa;
+        }
+
+        .brand-subtitle {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #222;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .brand-main-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #111;
+            margin: 0;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
         /* 頂部時間軸圖片設定 */
         .top-timeline-img {
             width: 100%;
             height: auto;
             display: block;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         /* 題目單元區塊 */
@@ -168,7 +232,7 @@
             transform: rotate(45deg);
         }
 
-        /* 💡 新增：LINE & IG QR Code 區塊設定 */
+        /* LINE & IG QR Code 區塊設定 */
         .social-qrcode-section {
             display: flex;
             justify-content: space-around;
@@ -208,10 +272,10 @@
         }
 
         .qrcode-box a:hover .qrcode-img {
-            transform: scale(1.03); /* 滑鼠移上去時微放大，增加互動感 */
+            transform: scale(1.03);
         }
 
-        /* 💡 新增：底層客戶資料填寫表格 */
+        /* 底層客戶資料填寫表格 */
         .user-info-form {
             border-top: 2px dashed #ccc;
             padding-top: 40px;
@@ -249,16 +313,68 @@
             transition: all 0.2s ease;
         }
 
-        /* 輸入框點擊聚焦時的黑框設定 */
         .form-group input:focus {
             border-color: #222;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        /* ==========================================
+        💡 局部新增：最頂層 呈祥官方品牌橫幅樣式 
+        ========================================== */
+        .official-company-header {
+            background-color: #1a365d; /* 復刻照片中的高質感深藍色 */
+            padding: 15px 30px;        /* 上下留白 15px，左右留白 30px */
+            display: flex;             /* 讓 LOGO 和文字水平並排 */
+            align-items: center;       /* 垂直居中對齊 */
+            gap: 15px;                 /* LOGO 與文字之間的間距 */
+        }
+
+        .official-logo {
+            height: 35px;              /* 固定 LOGO 圖片的高度，寬度會自動等比例縮放 */
+            width: auto;
+            display: block;
+        }
+
+        .official-company-name {
+            color: #ffffff;            /* 文字顏色設為純白 */
+            font-size: 1.4rem;         /* 設定適當的字體大小 */
+            font-weight: 700;          /* 字體加粗 */
+            margin: 0;                 /* 清除外邊距，防止排版跑掉 */
+            letter-spacing: 2px;       /* 讓中文字元之間有微微的呼吸間距 */
+        }
+
+        /* 為了讓這個橫幅在手機版不擠壓，在最下方的 @media (max-width: 600px) 內加入這段 */
+        @media (max-width: 600px) {
+            .official-company-header {
+                padding: 12px 20px;
+                gap: 10px;
+            }
+            .official-logo {
+                height: 28px;          /* 手機版時稍微縮小 LOGO 避免佔空間 */
+            }
+            .official-company-name {
+                font-size: 1.15rem;    /* 手機版時稍微縮小字體 */
+            }
         }
 
         /* 響應式 RWD 調整 */
         @media (max-width: 600px) {
             body {
                 padding: 20px 10px;
+            }
+            /* 手機版品牌橫幅改為上下排列 */
+            .brand-header {
+                flex-direction: column;
+            }
+            .brand-features {
+                min-width: auto;
+                padding: 15px 20px;
+            }
+            .brand-title-box {
+                padding: 15px 20px;
+            }
+            .brand-main-title {
+                font-size: 1.5rem;
             }
             .top-timeline-img {
                 margin-bottom: 25px;
@@ -278,7 +394,6 @@
             .option-label {
                 font-size: 1rem;
             }
-            /* 手機版時 QR code 改成上下排列 */
             .social-qrcode-section {
                 flex-direction: column;
                 gap: 40px;
@@ -286,7 +401,6 @@
             .qrcode-box {
                 max-width: 140px;
             }
-            /* 手機版表格排列 */
             .form-group {
                 flex-direction: column;
                 align-items: flex-start;
@@ -301,7 +415,30 @@
 </head>
 <body>
 
-<div class="survey-container">
+<div class="survey-container" style="padding: 0; overflow: hidden;">
+    <form id="surveyForm">
+    <div class="official-company-header">
+        <img src="logo.png" alt="呈祥保險經紀人 LOGO" class="official-logo">
+        <h2 class="official-company-name">呈祥保險經紀人股份有限公司</h2>
+    </div>
+
+
+    <div style="padding: 20px;">
+
+    
+    <div class="brand-header">
+        <div class="brand-features">
+            <ul>
+                <li>確定的持續提撥定期定額</li>
+                <li>專業人士策略建議</li>
+                <li>提高目標達成率</li>
+            </ul>
+        </div>
+        <div class="brand-title-box">
+            <div class="brand-subtitle">KJTC</div>
+            <h1 class="brand-main-title">理財教練陪跑計劃 推廣表</h1>
+        </div>
+    </div>
 
     <img src="timeline.png" alt="理財教練陪跑計劃時間軸" class="top-timeline-img">
 
@@ -311,23 +448,23 @@
             <div class="question-title">關於目前的財務狀況，您最希望改善哪一個部分？<span class="question-type-hint">（可複選）</span></div>
             <div class="options-group">
                 <label class="option-label">
-                    <input type="checkbox" name="q1" value="每月記帳還是存不到錢">
+                    <input type="checkbox" name="q1" value="存不到錢">
                     <span class="custom-checkbox"></span>每月記帳還是存不到錢
                 </label>
                 <label class="option-label">
-                    <input type="checkbox" name="q1" value="有存一筆錢，但只知道放銀行不知道能投哪裡">
+                    <input type="checkbox" name="q1" value="資金閒置">
                     <span class="custom-checkbox"></span>有存一筆錢，但只知道放銀行不知道能投哪裡
                 </label>
                 <label class="option-label">
-                    <input type="checkbox" name="q1" value="平時太忙，沒時間研究股票和市場">
+                    <input type="checkbox" name="q1" value="沒時間研究">
                     <span class="custom-checkbox"></span>平時太忙，沒時間研究股票和市場
                 </label>
                 <label class="option-label">
-                    <input type="checkbox" name="q1" value="有在做投資，但對投資市場不夠了解">
+                    <input type="checkbox" name="q1" value="投資知識不足">
                     <span class="custom-checkbox"></span>有在做投資，但對投資市場不夠了解
                 </label>
                 <label class="option-label">
-                    <input type="checkbox" name="q1" value="已加入投資市場多年，但會想知道還能怎麼規劃去放大資產">
+                    <input type="checkbox" name="q1" value="規劃資產放大">
                     <span class="custom-checkbox"></span>已加入投資市場多年，但會想知道還能怎麼規劃去放大資產
                 </label>
             </div>
@@ -354,6 +491,10 @@
                 <label class="option-label">
                     <input type="checkbox" name="q2" value="外幣/基金">
                     <span class="custom-checkbox"></span>外幣/基金
+                </label>
+                <label class="option-label">
+                    <input type="checkbox" name="q2" value="尚未開始投資">
+                    <span class="custom-checkbox"></span>尚未開始投資
                 </label>
             </div>
         </div>
@@ -385,12 +526,8 @@
                     <span class="custom-radio"></span>買奢侈品
                 </label>
                 <label class="option-label">
-                    <input type="radio" name="q3" value="打造退休後的每個月被動收入">
+                    <input type="radio" name="q3" value="退休後被動收入">
                     <span class="custom-radio"></span>打造退休後的每個月被動收入
-                </label>
-                <label class="option-label">
-                    <input type="radio" name="q3" value="尚未開始投資">
-                    <span class="custom-radio"></span>尚未開始投資
                 </label>
             </div>
         </div>
@@ -421,15 +558,58 @@
         </div>
     </div>
 
+    <div class="question-item">
+            <div class="question-number">05</div>
+            <div class="question-content">
+                <div class="question-title">您是否認同理財教練陪跑計劃？<span class="question-type-hint">（單選）</span></div>
+                <div class="options-group">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="是" required>
+                        <span class="custom-radio"></span>是
+                    </label>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <label class="option-label">
+                            <input type="radio" name="q5" value="否" id="q5_no">
+                            <span class="custom-radio"></span>否
+                        </label>
+                        <!-- 當勾選「否」時才顯示的原因輸入框 -->
+                        <input type="text" id="q5_reason" placeholder="請簡述您不認同的原因..." style="display: none; font-size: 1rem; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; outline: none; margin-left: 28px; width: calc(100% - 28px); box-sizing: border-box;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 💡 新增 Q6：單選題 -->
+        <div class="question-item">
+            <div class="question-number">06</div>
+            <div class="question-content">
+                <div class="question-title">您最喜歡理財陪跑教練計劃的哪個核心理念？<span class="question-type-hint">（單選）</span></div>
+                <div class="options-group">
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="定期定額的投入" required>
+                        <span class="custom-radio"></span>定期定額的投入
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="有專業人士建議">
+                        <span class="custom-radio"></span>有專業人士建議
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="提高目標達成率">
+                        <span class="custom-radio"></span>提高目標達成率
+                    </label>
+                </div>
+            </div>
+        </div>
+
     <div class="social-qrcode-section">
         <div class="qrcode-box">
-            <a href="https://line.me/ti/p/hDV9ANKjP_" target="_blank">
+            <a id="lineLink" href="https://line.me/ti/p/hDV9ANKjP_" target="_blank">
                 <img src="line.png" alt="LINE QR Code" class="qrcode-img">
                 <span>點擊加入 LINE 官方</span>
             </a>
         </div>
         <div class="qrcode-box">
-            <a href="https://www.instagram.com/wendlinn?igsh=MTc5ZXNmZjk0czdqYQ%3D%3D&utm_source=qr" target="_blank">
+            <a id="igLink" href="https://www.instagram.com/wendlinn?igsh=MTc5ZXNmZjk0czdqYQ%3D%3D&utm_source=qr" target="_blank">
                 <img src="ig.png" alt="Instagram QR Code" class="qrcode-img">
                 <span>點擊追蹤 Instagram</span>
             </a>
@@ -448,7 +628,121 @@
         </div>
     </div>
 
+    <button type="submit" id="submitBtn">
+    確認送出問卷
+    </button>
+
 </div>
+
+</form>
+
+<script>
+    let clickedLine = '否';
+    let clickedIg = '否';
+
+    // 💡 新增：控制 Q5 「否，原因」輸入框的顯示與隱藏
+    const q5Radios = document.querySelectorAll('input[name="q5"]');
+    const q5ReasonInput = document.getElementById('q5_reason');
+
+    q5Radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (document.getElementById('q5_no').checked) {
+                q5ReasonInput.style.display = 'block';
+                q5ReasonInput.required = true; // 點選否時，原因變為必填
+            } else {
+                q5ReasonInput.style.display = 'none';
+                q5ReasonInput.required = false;
+                q5ReasonInput.value = ''; // 切換回「是」時清空原因
+            }
+        });
+    });
+
+    document
+    .getElementById('lineLink')
+    .addEventListener('click', function() {
+
+        clickedLine = '是';
+
+    });
+
+    document
+    .getElementById('igLink')
+    .addEventListener('click', function() {
+
+        clickedIg = '是';
+
+    });
+
+    // 表單送出邏輯
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 防止表單預設跳轉畫面
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = '處理中，請稍候...';
+
+        // 替換成你之後部署好的 Google Apps Script 網址
+        const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyQrW2JxzD_OZzNKbA9QDJOUavzgafruA9k-f2xT8-DD5Ql75UaaxDn2tmT1exHtqSz/exec'; 
+
+        // 收集複選題答案（用逗號串接）
+        const q1Answers = Array.from(document.querySelectorAll('input[name="q1"]:checked')).map(el => el.value).join('\n')
+        const q2Answers = Array.from(document.querySelectorAll('input[name="q2"]:checked')).map(el => el.value).join('\n')
+        
+        // 收集單選題答案
+        const q3Answer = document.querySelector('input[name="q3"]:checked') ? document.querySelector('input[name="q3"]:checked').value : '';
+        const q4Answer = document.querySelector('input[name="q4"]:checked') ? document.querySelector('input[name="q4"]:checked').value : '';
+        
+        // 💡 新增：收集 Q5 與 Q6 答案
+        let q5Answer = document.querySelector('input[name="q5"]:checked') ? document.querySelector('input[name="q5"]:checked').value : '';
+        if (q5Answer === '否' && q5ReasonInput.value.trim() !== '') {
+            q5Answer = `否，原因：${q5ReasonInput.value.trim()}`; // 如果是否，把原因串在一起
+        }
+        const q6Answer = document.querySelector('input[name="q6"]:checked') ? document.querySelector('input[name="q6"]:checked').value : '';
+
+        // 客戶聯絡資料
+        const username = document.getElementById('username').value;
+        const usertel = document.getElementById('usertel').value;
+
+        // 打包資料
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('usertel', usertel);
+        formData.append('q1', q1Answers);
+        formData.append('q2', q2Answers);
+        formData.append('q3', q3Answer);
+        formData.append('q4', q4Answer);
+        formData.append('q5', q5Answer); // 💡 新增打包
+        formData.append('q6', q6Answer); // 💡 新增打包
+        formData.append('clickedLine', clickedLine);
+        formData.append('clickedIg', clickedIg);
+
+        // 利用 Fetch API 發送到後端 GAS
+        fetch(GAS_WEB_APP_URL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+            alert('問卷填寫成功！非常感謝您的參與。');
+            document.getElementById('surveyForm').reset();
+            q5ReasonInput.style.display = 'none';
+            } else if (data.status === 'duplicate') {
+            alert('您剛剛已經送出過問卷，請勿重複送出。');
+            } else {
+            alert('系統忙碌中，請稍後再試。');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('送出失敗，請檢查網路連線。');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = '確認送出問卷';
+        });
+    });
+</script>
 
 </body>
 </html>
