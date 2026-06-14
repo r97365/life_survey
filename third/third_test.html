@@ -608,17 +608,31 @@
                         <span class="q4-desc">絕對不能虧損，資產要穩健成長。</span>
                     </span>
                 </label>
-                <label class="option-label">
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="平衡發展">
-                    <span class="custom-radio"></span><strong>平衡發展：</strong>可以承受一點點波動，但要有打敗通膨的報酬率。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">平衡發展</span>
+                        <span class="q4-desc">可以承受一點點波動，但要有打敗通膨的報酬率。</span>
+                    </span>
                 </label>
-                <label class="option-label">
+                <!--
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="靈活彈性">
-                    <span class="custom-radio"></span><strong>靈活彈性：</strong>隨時可以調整，資金調度要方便。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">靈活彈性</span>
+                        <span class="q4-desc">隨時可以調整，資金調度要方便。</span>
+                    </span>
                 </label>
-                <label class="option-label">
+                -->
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="省時省心">
-                    <span class="custom-radio"></span><strong>省時省心：</strong>不用每天看盤，交給專業機制自動運作。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">省時省心</span>
+                        <span class="q4-desc">不用每天看盤，交給專業機制自動運作。</span>
+                    </span>
                 </label>
             </div>
         </div>
@@ -664,6 +678,47 @@
                         <span class="custom-radio"></span>提高目標達成率
                     </label>
                 </div>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-number">07</div>
+            <div class="question-content">
+
+                <div class="question-title">
+                    完成上述，您理想中的每月被動收入是多少？
+                    <span class="question-type-hint">（單選）</span>
+                </div>
+
+                <div class="options-group">
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="4000/月" required>
+                        <span class="custom-radio"></span>$4,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="7000/月">
+                        <span class="custom-radio"></span>$7,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="14000/月">
+                        <span class="custom-radio"></span>$14,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="20000/月">
+                        <span class="custom-radio"></span>$20,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="20000↑/月">
+                        <span class="custom-radio"></span>$20000 以上 / 月
+                    </label>
+
+                </div>
+
             </div>
         </div>
 
@@ -765,6 +820,8 @@
         }
         const q6Answer = document.querySelector('input[name="q6"]:checked') ? document.querySelector('input[name="q6"]:checked').value : '';
 
+        const q7Answer = document.querySelector('input[name="q7"]:checked') ? document.querySelector('input[name="q7"]:checked').value : '';
+
         // 客戶聯絡資料
         const username = document.getElementById('username').value;
         const usertel = document.getElementById('usertel').value;
@@ -779,6 +836,7 @@
         formData.append('q4', q4Answer);
         formData.append('q5', q5Answer); // 💡 新增打包
         formData.append('q6', q6Answer); // 💡 新增打包
+        formData.append('q7', q7Answer);
         formData.append('clickedLine', clickedLine);
         formData.append('clickedIg', clickedIg);
 
