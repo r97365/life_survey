@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KJTC 理財教練陪跑計劃 推廣表</title>
+    <title>理財教練陪跑計劃 推廣表</title>
     <style>
         /* 基礎設定 */
         body {
@@ -155,7 +155,7 @@
             color: #333;
             cursor: pointer;
             user-select: none;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
         .option-label input {
@@ -355,6 +355,17 @@
             .official-company-name {
                 font-size: 1.15rem;    /* 手機版時稍微縮小字體 */
             }
+            .q4-option {
+                padding: 14px 14px;
+            }
+
+            .q4-title {
+                font-size: 1.05rem;
+            }
+
+            .q4-desc {
+                font-size: 1rem;
+            }
         }
 
         /* 響應式 RWD 調整 */
@@ -411,6 +422,113 @@
                 box-sizing: border-box;
             }
         }
+        .option-text {
+            display: block;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .option-title {
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        #submitBtn {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 999px;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+                .q4-option {
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .q4-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .q4-title {
+            display: block;
+            font-weight: 800;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            color: #111;
+        }
+
+        .q4-desc {
+            display: block;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .modal {
+        display: none;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: rgba(0,0,0,0.5);
+
+        justify-content: center;
+        align-items: center;
+
+        z-index: 9999;
+        }
+
+        .modal-content {
+
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        text-align: center;
+
+        width: 85%;
+        max-width: 350px;
+        }
+
+        .success-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+        }
+
+        .modal-btn {
+
+        margin-top: 20px;
+
+        background: #007bff;
+
+        color: white;
+
+        border: none;
+
+        padding: 12px 24px;
+
+        border-radius: 999px;
+
+        font-size: 16px;
+
+        cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -435,12 +553,12 @@
             </ul>
         </div>
         <div class="brand-title-box">
-            <div class="brand-subtitle">KJTC</div>
+            <!-- <div class="brand-subtitle">KJTC</div> -->
             <h1 class="brand-main-title">理財教練陪跑計劃 推廣表</h1>
         </div>
     </div>
 
-    <img src="timeline.png" alt="理財教練陪跑計劃時間軸" class="top-timeline-img">
+    <!-- <img src="timeline.png" alt="理財教練陪跑計劃時間軸" class="top-timeline-img"> -->
 
     <div class="question-item">
         <div class="question-number">01</div>
@@ -538,21 +656,39 @@
         <div class="question-content">
             <div class="question-title">在選擇理財工具時，您最看重哪一個特點？<span class="question-type-hint">（單選）</span></div>
             <div class="options-group">
-                <label class="option-label">
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="安全第一">
-                    <span class="custom-radio"></span><strong>安全第一：</strong>絕對不能虧損，資產要穩健成長。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">安全第一</span>
+                        <span class="q4-desc">絕對不能虧損，資產要穩健成長。</span>
+                    </span>
                 </label>
-                <label class="option-label">
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="平衡發展">
-                    <span class="custom-radio"></span><strong>平衡發展：</strong>可以承受一點點波動，但要有打敗通膨的報酬率。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">平衡發展</span>
+                        <span class="q4-desc">可以承受一點點波動，但要有打敗通膨的報酬率。</span>
+                    </span>
                 </label>
-                <label class="option-label">
+                <!--
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="靈活彈性">
-                    <span class="custom-radio"></span><strong>靈活彈性：</strong>隨時可以調整，資金調度要方便。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">靈活彈性</span>
+                        <span class="q4-desc">隨時可以調整，資金調度要方便。</span>
+                    </span>
                 </label>
-                <label class="option-label">
+                -->
+                <label class="option-label q4-option">
                     <input type="radio" name="q4" value="省時省心">
-                    <span class="custom-radio"></span><strong>省時省心：</strong>不用每天看盤，交給專業機制自動運作。
+                    <span class="custom-radio"></span>
+                    <span class="q4-text">
+                        <span class="q4-title">省時省心</span>
+                        <span class="q4-desc">不用每天看盤，交給專業機制自動運作。</span>
+                    </span>
                 </label>
             </div>
         </div>
@@ -601,6 +737,47 @@
             </div>
         </div>
 
+        <div class="question-item">
+            <div class="question-number">07</div>
+            <div class="question-content">
+
+                <div class="question-title">
+                    完成上述，您理想中的每月被動收入是多少？
+                    <span class="question-type-hint">（單選）</span>
+                </div>
+
+                <div class="options-group">
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="4000/月" required>
+                        <span class="custom-radio"></span>$4,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="7000/月">
+                        <span class="custom-radio"></span>$7,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="14000/月">
+                        <span class="custom-radio"></span>$14,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="20000/月">
+                        <span class="custom-radio"></span>$20,000 / 月
+                    </label>
+
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="20000↑/月">
+                        <span class="custom-radio"></span>$20000 以上 / 月
+                    </label>
+
+                </div>
+
+            </div>
+        </div>
+
     <div class="social-qrcode-section">
         <div class="qrcode-box">
             <a id="lineLink" href="https://line.me/ti/p/hDV9ANKjP_" target="_blank">
@@ -637,6 +814,18 @@
 </form>
 
 <script>
+    function showSuccessModal(caseId) {
+    document.getElementById('caseIdText').innerHTML =
+        '<strong>案件編號：</strong><br>' + caseId;
+
+    document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+    location.reload();
+    }
+
     let clickedLine = '否';
     let clickedIg = '否';
 
@@ -699,6 +888,8 @@
         }
         const q6Answer = document.querySelector('input[name="q6"]:checked') ? document.querySelector('input[name="q6"]:checked').value : '';
 
+        const q7Answer = document.querySelector('input[name="q7"]:checked') ? document.querySelector('input[name="q7"]:checked').value : '';
+
         // 客戶聯絡資料
         const username = document.getElementById('username').value;
         const usertel = document.getElementById('usertel').value;
@@ -713,6 +904,7 @@
         formData.append('q4', q4Answer);
         formData.append('q5', q5Answer); // 💡 新增打包
         formData.append('q6', q6Answer); // 💡 新增打包
+        formData.append('q7', q7Answer);
         formData.append('clickedLine', clickedLine);
         formData.append('clickedIg', clickedIg);
 
@@ -724,9 +916,9 @@
         .then(response => response.json())
         .then(data => {
             if(data.status === 'success') {
-            alert('問卷填寫成功！非常感謝您的參與。');
             document.getElementById('surveyForm').reset();
             q5ReasonInput.style.display = 'none';
+            showSuccessModal(data.caseId || '已建立');
             } else if (data.status === 'duplicate') {
             alert('您剛剛已經送出過問卷，請勿重複送出。');
             } else {
@@ -743,6 +935,32 @@
         });
     });
 </script>
+
+<div id="successModal" class="modal">
+  <div class="modal-content">
+
+    <div class="success-icon">
+      🎉
+    </div>
+
+    <h2>問卷送出成功</h2>
+
+    <p>
+      感謝您的填寫<br>
+      我們已收到您的資料
+    </p>
+
+    <p id="caseIdText"></p>
+
+    <button
+      class="modal-btn"
+      onclick="closeSuccessModal()"
+    >
+      確定
+    </button>
+
+  </div>
+</div>
 
 </body>
 </html>
